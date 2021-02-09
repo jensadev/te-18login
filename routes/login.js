@@ -16,9 +16,18 @@ router.post('/', function(req, res, next) {
   const password = req.body.password;
 
   if (password == "Secret123") {
+    // kod för att kolla uppgifter med db
+    // om login rätt sätt session
     res.send('Topsecret!');
   } else {
-    res.redirect('/login');
+    // kommentera ut vid felsökning
+    res.render(
+      'login',
+      {
+        title: 'Schoolsoft',
+        error: 'FEL!'
+      }
+    );
   }
 
 
