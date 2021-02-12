@@ -25,29 +25,35 @@ router.get('/kryptan/:pwd', function(req, res, next) {
 });
 
 /* POST login */
-router.post('/', function(req, res, next) {
-
-  console.log(req.body);
+router.post('/', async function(req, res, next) {
 
   const username = req.body.username;
   const password = req.body.password;
 
-  if (password == "Secret123") {
-    // kod för att kolla uppgifter med db
-    // om login rätt sätt session
-    req.session.loggedin = true;
-    req.session.username = username;
-    res.redirect('/topsecret');
+  if (username && password) {
+    try {
+      const sql = 'SELECT password FROM users WHERE name = ?';
+      const result = await query(sql, username);
 
-  } else {
-    // kommentera ut vid felsökning
-    res.render(
-      'login',
-      {
-        title: 'Schoolsoft',
-        error: 'FEL!'
+      if(result.length > 0) {
+        bcrypt.compare(password, result[0].password, function(err, result) {
+          if (result == true) {
+            req.session.loggedin = true;
+            req.session.username = username;
+            res.redirect('/topsecret');
+          } else {
+            res.render('login',{ error: 'Wrong username or password!'});
+          }
+        });
+      } else {
+        res.render('login',{ error: 'Wrong username or password!'});
       }
-    );
+    } catch (e) {
+      next(e);
+      console.error(e);
+    }
+  } else {
+    res.render('login',{ error: 'Wrong username or password!'});
   }
 });
 
