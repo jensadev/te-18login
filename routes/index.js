@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+const authcontroller = require('../controllers/AuthController');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -14,5 +15,7 @@ router.get('/topsecret', function(req, res, next) {
       res.send('Please login to view this page!');
   }
 });
+
+router.post('/logout', authcontroller.destroy);
 
 module.exports = router;

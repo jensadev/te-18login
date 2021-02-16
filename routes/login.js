@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');
-const controller = require('../controllers/AuthController');
+const authcontroller = require('../controllers/AuthController');
 const { query } = require('../models/db');
 const { body, validationResult } = require('express-validator');
 
@@ -27,9 +27,9 @@ router.get('/kryptan/:pwd', function(req, res, next) {
 router.post('/', 
   body('username').notEmpty().trim(),
   body('password').notEmpty(),
-  controller.store);
+  authcontroller.store);
 
-router.delete('/', controller.destroy);
+router.delete('/', authcontroller.destroy);
 
 module.exports = router;
 
