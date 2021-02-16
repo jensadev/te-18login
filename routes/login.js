@@ -34,7 +34,14 @@ router.post('/',
   // Finds the validation errors in this request and wraps them in an object with handy functions
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    return res.status(400).json({ errors: errors.array() });
+    res.render('login',{ errors: errors.array()});
+    // return res.status(400).json({ errors: errors.array() });
+    /*
+    "value": "",
+    "msg": "Invalid value",
+    "param": "username",
+    "location": "body"
+    */
   }
 
   const username = req.body.username;
@@ -51,11 +58,11 @@ router.post('/',
           req.session.username = username;
           res.redirect('/topsecret');
         } else {
-          res.render('login',{ error: 'Wrong username or password!'});
+          res.render('login',{ errors: 'Wrong username or password!'});
         }
       });
     } else {
-      res.render('login',{ error: 'Wrong username or password!'});
+      res.render('login',{ errors: 'Wrong username or password!'});
     }
   } catch (e) {
     next(e);
