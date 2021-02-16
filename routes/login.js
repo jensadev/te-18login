@@ -6,11 +6,10 @@ const { body, validationResult } = require('express-validator');
 
 /* GET login form */
 router.get('/', function(req, res, next) {
-  // res.send('respond with a resource');
-  res.render('login', {title: 'Schoolsoft'});
+  res.render('login');
 });
 
-/* GET skapa en hash */
+/* GET skapa en hash som vi kan spara i db */
 router.get('/kryptan/:pwd', function(req, res, next) {
 
   const myPlaintextPassword = req.params.pwd;
@@ -21,8 +20,6 @@ router.get('/kryptan/:pwd', function(req, res, next) {
       pwd: hash
     });
   });
-
-
 });
 
 /* POST login */
@@ -30,11 +27,9 @@ router.post('/',
   body('username').notEmpty().trim(),
   body('password').notEmpty(),
   async function(req, res, next) {
-  // Finds the validation errors in this request and wraps them in an object with handy functions
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    res.render('login',{ errors: errors.array()});
-    // return res.status(400).json({ errors: errors.array() });
+    return res.render('login',{ username: req.body.username, errors: errors.array()});
   }
   const username = req.body.username;
   const password = req.body.password;
@@ -50,11 +45,11 @@ router.post('/',
           req.session.username = username;
           res.redirect('/topsecret');
         } else {
-          res.render('login',{ errors: 'Wrong username or password!'});
+          res.render('login',{ username: req.body.username, errors: 'Wrong username or password!'});
         }
       });
     } else {
-      res.render('login',{ errors: 'Wrong username or password!'});
+      res.render('login',{ username: req.body.username, errors: 'Wrong username or password!'});
     }
   } catch (e) {
     next(e);
