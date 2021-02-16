@@ -30,20 +30,12 @@ router.post('/',
   body('username').notEmpty().trim(),
   body('password').notEmpty(),
   async function(req, res, next) {
-
   // Finds the validation errors in this request and wraps them in an object with handy functions
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     res.render('login',{ errors: errors.array()});
     // return res.status(400).json({ errors: errors.array() });
-    /*
-    "value": "",
-    "msg": "Invalid value",
-    "param": "username",
-    "location": "body"
-    */
   }
-
   const username = req.body.username;
   const password = req.body.password;
 
@@ -72,3 +64,10 @@ router.post('/',
 
 
 module.exports = router;
+
+    /*
+    "value": "",
+    "msg": "Invalid value",
+    "param": "username",
+    "location": "body"
+    */
