@@ -58,16 +58,3 @@ describe('/login', () => {
     });
   });
 });
-
-describe('/home', () => {
-  describe('GET /', () => {
-    it('should redirect unauthorized user to /login', () => {
-      request.get('/home')
-        .expect(302)
-        .expect('Location', '/login')
-        .end((err, res) => {
-          if (err) throw err;
-        });
-    });
-  });
-});
