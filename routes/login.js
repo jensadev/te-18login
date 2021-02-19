@@ -43,7 +43,7 @@ router.post('/',
           if (result == true) {
             req.session.loggedin = true;
             req.session.username = username;
-            res.redirect('/topsecret');
+            res.redirect('/home');
           } else {
             res.render('login',{ username: req.body.username, errors: 'Wrong username or password!'});
           }
