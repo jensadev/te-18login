@@ -1,0 +1,11 @@
+extends layout
+
+block content
+  main.container
+    h1 Welcome back user.
+
+    form(action="/logout", method="post")
+      //- vi låtsas vara en delete request
+      button(type="submit") Logout
+
+    h2 Change password 
