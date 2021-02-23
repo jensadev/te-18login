@@ -3,6 +3,9 @@ const { query } = require('../models/db');
 const { body, validationResult } = require('express-validator');
 
 module.exports.show = async function(req, res, next) {
+  if (req.session.loggedin) {
+    return redirect('/home');
+  }
   return res.render('login');
 };
 
@@ -16,6 +19,7 @@ module.exports.destroy = async function(req, res, next) {
 module.exports.store = async function(req, res, next) {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
+      console.log(errors.array());
       return res.status(401).render('login',{ username: req.body.username, errors: errors.array()});
     }
     const username = req.body.username;
