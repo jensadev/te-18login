@@ -16,7 +16,7 @@ module.exports.destroy = async function(req, res, next) {
 module.exports.store = async function(req, res, next) {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.render('login',{ username: req.body.username, errors: errors.array()});
+      return res.status(401).render('login',{ username: req.body.username, errors: errors.array()});
     }
     const username = req.body.username;
     const password = req.body.password;
@@ -32,11 +32,13 @@ module.exports.store = async function(req, res, next) {
             req.session.username = username;
             res.redirect('/home');
           } else {
-            res.render('login',{ username: req.body.username, errors: 'Wrong username or password!'});
+            return res.status(401)
+              .render('login',{ username: req.body.username, errors: 'Wrong username or password!'});
           }
         });
       } else {
-        res.render('login',{ username: req.body.username, errors: 'Wrong username or password!'});
+        return res.status(401)
+          .render('login',{ username: req.body.username, errors: 'Wrong username or password!'});
       }
     } catch (e) {
       next(e);

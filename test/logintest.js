@@ -1,9 +1,3 @@
-// npm install mocha chai supertest --save-dev
-// mkdir test
-// save logintest.js
-// package.json
-// "test": "mocha -r dotenv/config --timeout 10000 --exit"
-
 const expect = require('chai').expect;
 const app = require('../app');
 const request = require('supertest')(app);
@@ -49,7 +43,7 @@ describe('/login', () => {
       request.post('/login')
         .type('form')
         .send({username: '', password: ''})
-        .expect(200)
+        .expect(401)
         .end((err, res) => {
           if (err) throw err;
           expect(res.text).to.contain('Username or password is invalid');
