@@ -8,8 +8,9 @@ router.get('/', authcontroller.show);
 
 /* POST login */
 router.post('/',
-  body('username').notEmpty().trim(),
+  body('username').notEmpty().trim().toLowerCase(),
   body('password').notEmpty(),
+  body('rememberme').toBoolean(),
   authcontroller.store
 );
 

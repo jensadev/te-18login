@@ -26,14 +26,22 @@ module.exports.store = async function(req, res, next) {
     const password = req.body.password;
 
     try {
-      const sql = 'SELECT password FROM users WHERE name = ?';
-      const result = await query(sql, username);
+      const sql = 'SELECT id, password FROM users WHERE name = ?';
+      const user = await query(sql, username);
 
-      if(result.length > 0) {
-        bcrypt.compare(password, result[0].password, function(err, result) {
+      if(user.length > 0) {
+        bcrypt.compare(password, user[0].password, function(err, result) {
           if (result == true) {
             req.session.loggedin = true;
             req.session.username = username;
+            req.session.id = user[0].id;
+            req.session.username = username;
+
+            if ( req.body.rememberme ) {
+              const hour = 3600000;
+              req.session.cookie.maxAge = 14 * 24 * hour; //2 weeks
+            }
+
             res.redirect('/home');
           } else {
             return res.status(401)

@@ -2,7 +2,7 @@ extends layout
 
 block content
   main.container
-    h1 Welcome back user.
+    h1 Welcome back #{username}
 
     form(action="/logout", method="post")
       //- vi låtsas vara en delete request

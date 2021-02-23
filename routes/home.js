@@ -4,7 +4,9 @@ var router = express.Router();
 /* GET topsekret page. */
 router.get('/', function(req, res, next) {
   if (req.session.loggedin) {
-    res.render('home');
+    res.render('home', {
+      username: req.session.username
+    });
   } else {
     res.redirect('/login');
   }

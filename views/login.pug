@@ -14,5 +14,9 @@ block content
         input#password.form-control(placeholder="password" type="password", name="password" class=errors ? 'is-invalid' : '')
         if errors 
           .invalid-feedback Username or password is invalid
+      .mb-3.text-center
+        label
+          input(type="checkbox" name="rememberme" value="rememberme")
+          |  Remember me
 
       button.w-100.btn.btn-primary(type="submit") Sign in
