@@ -19,12 +19,6 @@ module.exports.store = async function(req, res, next) {
     const email = req.body.email;
     const password = req.body.password;
 
-    // res.json({
-    //   username: username,
-    //   email: email,
-    //   password: password
-    // });
-
     bcrypt.hash(password, 10, async function (err, hash) {
       if (err) throw err;
       try {
@@ -40,28 +34,24 @@ module.exports.store = async function(req, res, next) {
         console.error(e);
       }
     });
+};
 
-    // try {
-    //   const sql = 'SELECT password FROM users WHERE name = ?';
-    //   const result = await query(sql, username);
+module.exports.destroy = async function(req, res, next) {
+  const id = req.params.id;
+  const password = req.body.password;
+  if (id === req.session.userid) {
+    // delete user kolla password för usern om du ska vara riktigt säker innan delete
+    // bcrypt password använda då WHERE password = hash AND id = id
+    const sql = 'DELETE FROM users WHERE id = ?';
+  }
+};
 
-    //   if(result.length > 0) {
-    //     bcrypt.compare(password, result[0].password, function(err, result) {
-    //       if (result == true) {
-    //         req.session.loggedin = true;
-    //         req.session.username = username;
-    //         res.redirect('/home');
-    //       } else {
-    //         return res.status(401)
-    //           .render('login',{ username: req.body.username, errors: 'Wrong username or password!'});
-    //       }
-    //     });
-    //   } else {
-    //     return res.status(401)
-    //       .render('login',{ username: req.body.username, errors: 'Wrong username or password!'});
-    //   }
-    // } catch (e) {
-    //   next(e);
-    //   console.error(e);
-    // }
+module.exports.update = async (req, res, next) => {
+  const id = req.params.id; // vi vill ha ett user id, men vi behöver kolla så den usern faktiskt är inloggad
+  if (id === req.session.userid) {
+    // vi kan behöva sätta userid vid inlog
+    // för extra säkerhet så kräv password vid ändring av username/password
+    // byta username
+    const sql = 'UPDATE users SET name=? WHERE id = ?'; // name och id
+  }
 };
