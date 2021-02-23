@@ -4,9 +4,9 @@ const { body, validationResult } = require('express-validator');
 
 module.exports.show = async function(req, res, next) {
   if (req.session.loggedin) {
-    return redirect('/home');
+    return res.redirect('/home');
   }
-  return res.render('register');
+  return res.render('register', { title: 'Loginsidan'});
 };
 
 module.exports.store = async function(req, res, next) {

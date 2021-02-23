@@ -41,7 +41,6 @@ describe('/login', () => {
               if (err) return done(err);
               return done();
             });
-            return done();
           });
       });
   });

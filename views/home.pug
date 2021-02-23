@@ -1,7 +1,7 @@
 extends layout
 
 block content
-  main.container
+  main.container.pt-5
     h1 Welcome back #{username}
 
     form(action="/logout", method="post")
@@ -17,3 +17,7 @@ block content
 
     h2 Delete user 
     p Post till /home/userid med password för säkerhet, eller länk till /home/delete/userid
+
+    h2 Ladda upp en avatar 
+    p spara i databasen / spara i en temp mapp 
+      a(href="https://www.npmjs.com/package/express-fileupload") Express fileupload

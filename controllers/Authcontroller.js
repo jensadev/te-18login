@@ -4,7 +4,7 @@ const { body, validationResult } = require('express-validator');
 
 module.exports.show = async function(req, res, next) {
   if (req.session.loggedin) {
-    return redirect('/home');
+    return res.redirect('/home');
   }
   return res.render('login');
 };

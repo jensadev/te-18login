@@ -9,23 +9,27 @@ mixin nav-link(href, name)
 block nav
   nav.navbar.navbar-expand-lg.navbar-light.bg-light
     .container-fluid
-      a.navbar-brand(href='#') Navbar
+      a.navbar-brand(href='/') #{title}
       button.navbar-toggler(type='button' data-bs-toggle='collapse' data-bs-target='#navbarSupportedContent' aria-controls='navbarSupportedContent' aria-expanded='false' aria-label='Toggle navigation')
         span.navbar-toggler-icon
       #navbarSupportedContent.collapse.navbar-collapse
         ul.navbar-nav.me-auto.mb-2.mb-lg-0
-          +nav-link('/', 'Start')
           +nav-link('/login', 'Login')
           +nav-link('/register', 'Register')
+          +nav-link('/home', 'Home')
 
-        .nav-item.dropdown
-          a#navbarDropdown.nav-link.dropdown-toggle(href='#' role='button' data-bs-toggle='dropdown' aria-expanded='false')
-            | User dropdown
-          ul.dropdown-menu(aria-labelledby='navbarDropdown')
-            +nav-link('/home', 'Home')
-            li
-              hr.dropdown-divider
-            li
-              form.d-flex.justify-content-center(method='POST' action='/logout')
-                //- input.form-control.me-2(type='search' placeholder='Search' aria-label='Search')
-                button.btn.btn-outline-success(type='submit') Logout
+      if username
+        .nav-item
+          .nav-link(href='/home' role='button')
+            img.rounded-circle(width='48' height='48' src='https://robohash.org/' + username)
+        //- .nav-item.dropdown
+        //-   a#navbarDropdown.nav-link(href='#' role='button' data-bs-toggle='dropdown' aria-expanded='false')
+        //-     img.rounded-circle(width='48' height='48' src='https://robohash.org/' + username)
+        //-   //- ul.dropdown-menu(aria-labelledby='navbarDropdown')
+        //-   //-   +nav-link('/home', 'Home')
+        //-   //-   li
+        //-   //-     hr.dropdown-divider
+        //-   //-   li
+        //-   //-     form.d-flex.justify-content-center(method='POST' action='/logout')
+        //-   //-       //- input.form-control.me-2(type='search' placeholder='Search' aria-label='Search')
+        //-   //-       button.btn.btn-outline-success(type='submit') Logout
