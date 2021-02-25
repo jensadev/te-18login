@@ -26,12 +26,49 @@ describe('/home', () => {
   it('should get a restricted page', function (done) {
     authenticatedSession.get('/home')
       .expect(200)
-      .end(done)
+      .end((err, res) => {
+        if (err) return done(err);
+        expect(res.text).to.contain(process.env.TEST_USER);
+        return done();
+      });
   });
 
   it('should log out a user', function (done) {
     authenticatedSession.post('/logout')
       .expect(302)
-      .end(done)
+      .end(done);
   });
-});
+
+  it('should let the user destroy itself', (done) => {
+    authenticatedSession.get('/home/delete')
+    .expect(200)
+    .end((err, res) => {
+      if (err) return done(err);
+      expect(res.text).to.contain('Confirm account deletion');
+      authenticatedSession.post('/home/delete')
+        .type('form')
+        .send({
+          confirm: true
+        })
+        .expect(302)
+        .end((err, res) => {
+          if (err) return done(err);
+          return done();
+        });
+    });
+  });
+
+  it('should let the user change username', (done) => {
+    authenticatedSession.post('/home')
+      .type('form')
+      .send({
+        username: 'newname'
+      })
+      .expect(200)
+      .end((err, res) => {
+        if (err) return done(err);
+        expect(res.text).to.contain('newname');
+        return done();
+      });
+    });
+  });
