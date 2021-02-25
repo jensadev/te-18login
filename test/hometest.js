@@ -39,7 +39,7 @@ describe('/home', () => {
       .end(done);
   });
 
-  it('should let the user destroy itself', (done) => {
+  it('should let the user delete account', (done) => {
     authenticatedSession.get('/home/delete')
     .expect(200)
     .end((err, res) => {
@@ -58,7 +58,7 @@ describe('/home', () => {
     });
   });
 
-  it('should let the user change username', (done) => {
+  it('should let the user change name', (done) => {
     authenticatedSession.post('/home')
       .type('form')
       .send({
