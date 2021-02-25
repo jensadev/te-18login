@@ -6,12 +6,23 @@ block content
       h1.text-center.pb-3 Please sign in
       .mb-3
         label.form-label.visually-hidden(for="username") Username:
-        input#username.form-control(placeholder="username" type="text", name="username", value=username ? username : '', class=errors ? 'is-invalid' : '')
+        input#username.form-control(
+          placeholder="username",
+          type="text",
+          name="username",
+          value=username ? username : '',
+          class=errors ? 'is-invalid' : '',
+          required)
         if errors 
           .invalid-feedback Username or password is invalid
       .mb-3
         label.form-label.visually-hidden(for="password") Password:
-        input#password.form-control(placeholder="password" type="password", name="password" class=errors ? 'is-invalid' : '')
+        input#password.form-control(
+          placeholder="password",
+          type="password",
+          name="password",
+          class=errors ? 'is-invalid' : ''
+          required)
         if errors 
           .invalid-feedback Username or password is invalid
       .mb-3.text-center
