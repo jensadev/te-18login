@@ -2,11 +2,23 @@ const expect = require('chai').expect;
 const app = require('../app');
 // const request = require('supertest');
 const session = require('supertest-session')(app);
+const { query } = require('../models/db');
+const bcrypt = require('bcrypt');
 
 // const testSession = null;
 
 describe('/home', () => {
   let authenticatedSession = null;
+  
+  before( async (done) => {
+    // await query('DELETE FROM users WHERE email = ?',  process.env.TEST_EMAIL);
+    const sql = 'INSERT INTO users (name, email, password, created_at, updated_at) VALUES (?, now(), now())';
+    bcrypt.hash(process.env.TEST_PASSWORD, 10, async function (err, hash) {
+      if (err) return done(err);
+      await query(sql, [process.env.TEST_USER, process.env.TEST_EMAIL, hash]);
+    });
+    return done();
+  });
 
   beforeEach((done) => {
     session.post('/login')

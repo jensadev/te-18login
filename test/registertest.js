@@ -18,15 +18,15 @@ describe('/register', () => {
   describe('POST /', () => {
     beforeEach(async () => {
       // await query('truncate table meals');
-      await query('DELETE FROM users WHERE email = ?', 'test@test.se');
+      await query('DELETE FROM users WHERE email = ?', process.env.TEST_EMAIL);
     });
 
     it('should register a new user provided it has a correct request body', (done) => {
       request.post('/register')
         .type('form')
         .send({
-          username: 'test',
-          email: 'test@test.se',
+          username: process.env.TEST_USER,
+          email: process.env.TEST_EMAIL,
           password: process.env.TEST_PASSWORD,
           passwordconfirmation: process.env.TEST_PASSWORD
         })
@@ -41,8 +41,8 @@ describe('/register', () => {
       request.post('/register')
         .type('form')
         .send({
-          username: 'test',
-          email: 'test@test.se',
+          username: process.env.TEST_USER,
+          email: process.env.TEST_EMAIL,
           password: process.env.TEST_PASSWORD,
           passwordconfirmation: 'fel-passWord123'
         })
@@ -58,7 +58,7 @@ describe('/register', () => {
       request.post('/register')
         .type('form')
         .send({
-          username: 'test',
+          username: process.env.TEST_USER,
           email: 'dettaär@inteokej',
           password: process.env.TEST_PASSWORD,
           passwordconfirmation:  process.env.TEST_PASSWORD
