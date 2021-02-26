@@ -34,7 +34,7 @@ module.exports.store = async function(req, res, next) {
           if (result == true) {
             req.session.loggedin = true;
             req.session.username = username;
-            req.session.id = user[0].id;
+            req.session.userid = user[0].id;
             req.session.username = username;
 
             if ( req.body.rememberme ) {

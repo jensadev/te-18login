@@ -16,10 +16,3 @@ router.post('/',
 
 
 module.exports = router;
-
-    /*
-    "value": "",
-    "msg": "Invalid value",
-    "param": "username",
-    "location": "body"
-    */

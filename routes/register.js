@@ -8,7 +8,7 @@ router.get('/', registercontroller.show);
 
 /* POST login */
 router.post('/',
-  body('username').notEmpty().trim().toLowerCase(),
+  body('username').notEmpty().trim(),
   body('email').notEmpty().isEmail().trim().toLowerCase(),
   body('password').notEmpty(),
   body('passwordconfirmation').custom((value, { req }) => {

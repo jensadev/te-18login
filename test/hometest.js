@@ -59,10 +59,10 @@ describe('/home', () => {
   });
 
   it('should let the user change name', (done) => {
-    authenticatedSession.post('/home')
+    authenticatedSession.post('/home/edit')
       .type('form')
       .send({
-        username: 'newname'
+        newusername: 'newname'
       })
       .expect(200)
       .end((err, res) => {
