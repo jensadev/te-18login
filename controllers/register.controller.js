@@ -1,5 +1,5 @@
 const bcrypt = require('bcrypt');
-const { query } = require('../models/db');
+const { query } = require('../models/db.model');
 const { body, validationResult } = require('express-validator');
 
 module.exports.show = async function(req, res, next) {

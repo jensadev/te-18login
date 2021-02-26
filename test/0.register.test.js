@@ -2,7 +2,7 @@ const expect = require('chai').expect;
 const app = require('../app');
 const request = require('supertest')(app);
 // const session = require('supertest-session')(app);
-const { query } = require('../models/db');
+const { query } = require('../models/db.model');
 
 describe('/register', () => {
   describe('GET /', () => {

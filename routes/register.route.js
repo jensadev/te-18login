@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { body, validationResult } = require('express-validator');
-const registercontroller = require('../controllers/Registercontroller');
+const registercontroller = require('../controllers/register.controller');
 
 /* GET login form */
 router.get('/', registercontroller.show);

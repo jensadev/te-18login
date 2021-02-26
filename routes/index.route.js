@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-const authcontroller = require('../controllers/Authcontroller');
+const authcontroller = require('../controllers/auth.controller');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {

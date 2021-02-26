@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { body, validationResult } = require('express-validator');
-const { query } = require('../models/db');
+const { query } = require('../models/db.model');
 
 /* GET topsekret page. */
 router.get('/', function(req, res, next) {
