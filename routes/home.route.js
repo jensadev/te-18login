@@ -26,7 +26,7 @@ router.post('/edit',
       }
       // edit user
       const sql = 'UPDATE users SET name = ? WHERE id = ?';
-      const result = await query(sql, req.body.newusername, req.session.userid);
+      const result = await query(sql, [req.body.newusername, req.session.userid]);
       if (result.changedRows == 1) {
         req.session.username = req.body.newusername;
         return res.render('home', {

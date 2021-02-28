@@ -19,8 +19,7 @@ module.exports.destroy = async function(req, res, next) {
 module.exports.store = async function(req, res, next) {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      console.log(errors.array());
-      return res.status(401).render('login',{ username: req.body.username, errors: errors.array()});
+      return res.status(400).render('login', { username: req.body.username, errors: errors.array() });
     }
     const username = req.body.username;
     const password = req.body.password;
@@ -35,7 +34,6 @@ module.exports.store = async function(req, res, next) {
             req.session.loggedin = true;
             req.session.username = username;
             req.session.userid = user[0].id;
-            req.session.username = username;
 
             if ( req.body.rememberme ) {
               const hour = 3600000;
@@ -45,12 +43,12 @@ module.exports.store = async function(req, res, next) {
             res.redirect('/home');
           } else {
             return res.status(401)
-              .render('login',{ username: req.body.username, errors: 'Wrong username or password!'});
+              .render('login', { username: req.body.username, errors: 'Wrong username or password!' });
           }
         });
       } else {
         return res.status(401)
-          .render('login',{ username: req.body.username, errors: 'Wrong username or password!'});
+          .render('login', { username: req.body.username, errors: 'Wrong username or password!' });
       }
     } catch (e) {
       next(e);

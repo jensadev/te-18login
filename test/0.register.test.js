@@ -16,7 +16,7 @@ describe('/register', () => {
   });
 
   describe('POST /', () => {
-    beforeEach(async () => {
+    before('delete user', async () => {
       // await query('truncate table meals');
       await query('DELETE FROM users WHERE email = ?', process.env.TEST_EMAIL);
     });
