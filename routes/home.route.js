@@ -2,16 +2,13 @@ const express = require('express');
 const router = express.Router();
 const { body, validationResult } = require('express-validator');
 const { query } = require('../models/db.model');
+const { verify } = require('../middlewares/verify');
 
 /* GET topsekret page. */
-router.get('/', function(req, res, next) {
-  if (req.session.loggedin) {
+router.get('/', verify, (req, res, next) => {
     res.render('home', {
       username: req.session.username
     });
-  } else {
-    res.redirect('/login');
-  }
 });
 
 router.get('/edit', (req, res, next) => {
