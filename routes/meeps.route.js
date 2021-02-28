@@ -7,7 +7,7 @@ const { verify } = require('../middlewares/verify');
 /* GET all meeps */
 router.get('/',
   async (req, res, next) => {
-    const sql = 'SELECT meeps.*, users.name FROM meeps JOIN users ON meeps.user_id = users.id';
+    const sql = 'SELECT meeps.*, users.name AS author FROM meeps JOIN users ON meeps.user_id = users.id';
     result = await query(sql);
     // res.send(result);
     res.render('meeps', { meeps: result })
@@ -34,7 +34,7 @@ router.get('/update/:id',
 router.get('/:id',
   param('id').isInt(),
   async (req, res, next) => {
-    const sql = 'SELECT meeps.*, users.name FROM meeps JOIN users ON meeps.user_id = users.id WHERE meeps.id = ?';
+    const sql = 'SELECT meeps.*, users.name AS author FROM meeps JOIN users ON meeps.user_id = users.id WHERE meeps.id = ?';
     result = await query(sql, req.params.id);
     res.send(result);
 });
@@ -74,6 +74,6 @@ router.post('/delete/',
     if (result.affectedRows > 0) {
       res.redirect('/meeps');
     }
-  });
+});
 
 module.exports = router;
