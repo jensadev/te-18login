@@ -65,7 +65,7 @@ router.post('/update',
 });
 
 /* POST to delete a meep */
-router.post('/delete/',
+router.post('/delete',
   body('meepid').isInt(),
   verify,
   async (req, res, next) => {
