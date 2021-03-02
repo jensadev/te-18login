@@ -36,6 +36,7 @@ router.post('/edit',
         return res.status(400).render('home',{ errors: errors.array() });
       }
     } else {
+      req.flash('warn', 'Unauthenticated, please sign in.');
       return res.redirect('/login');
     }
 });

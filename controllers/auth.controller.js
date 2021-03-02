@@ -6,7 +6,8 @@ module.exports.show = async function(req, res, next) {
   if (req.session.loggedin) {
     return res.redirect('/home');
   }
-  return res.render('login');
+  console.log(req.flash)
+  return res.render('login', { flash: req.flash('warn') });
 };
 
 module.exports.destroy = async function(req, res, next) {
