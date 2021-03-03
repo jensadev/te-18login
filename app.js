@@ -7,12 +7,14 @@ const logger = require('morgan');
 const sassMiddleware = require('node-sass-middleware');
 const session = require('express-session');
 const flash = require('connect-flash');
+const moment = require('moment');
 
 const indexRouter = require('./routes/index.route');
 const loginRouter = require('./routes/login.route');
 const homeRouter = require('./routes/home.route');
 const registerRouter = require('./routes/register.route');
 const meepsRouter = require('./routes/meeps.route');
+const { request } = require('express');
 
 const app = express();
 
@@ -37,6 +39,8 @@ app.use(session({
   cookie: {samesite: true}
 }));
 app.use(flash());
+
+app.locals.moment = require('moment');
 
 app.use('/', indexRouter);
 app.use('/login', loginRouter);

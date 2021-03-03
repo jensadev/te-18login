@@ -4,6 +4,8 @@ block content
   main.container.pt-5
     h1 Welcome back #{username}
 
+    a(href='/meeps/new') Post new meep
+
     form(action="/logout", method="post")
       //- vi låtsas vara en delete request
       button(type="submit") Logout

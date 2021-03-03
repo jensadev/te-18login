@@ -1,5 +1,38 @@
+:root {
+  --primary: rgb(0,69, 189);
+  --secondary: rgb(255, 145, 0)
+; }
+
 .form-signin {
   width: 100%;
   max-width: 20rem; }
+
+body {
+  background-color: var(--secondary); }
+
+.meep-card {
+  z-index: 100;
+  background-color: rgba(255, 255, 255, 0.9);
+  border: none; }
+
+.text-bg {
+  color: var(--primary);
+  z-index: -1;
+  font-size: 8rem;
+  font-weight: 300; }
+
+.card-title {
+  color: var(--primary); }
+
+.meep-link {
+  text-decoration: none;
+  color: var(--bs-dark); }
+  .meep-link:hover {
+    color: inherit; }
+
+.nav-link {
+  color: var(--primary) !important; }
+  .nav-link:hover {
+    color: var(--bs-dark) !important; }
 
 /*# sourceMappingURL=style.css.map */

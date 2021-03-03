@@ -7,9 +7,10 @@ const { verify } = require('../middlewares/verify');
 /* GET all meeps */
 router.get('/',
   async (req, res, next) => {
-    const sql = 'SELECT meeps.*, users.name AS author FROM meeps JOIN users ON meeps.user_id = users.id';
+    const sql = 'SELECT meeps.*, users.name AS author FROM meeps JOIN users ON meeps.user_id = users.id ORDER BY created_at DESC';
     result = await query(sql);
     // res.send(result);
+    // console.table(result);
     res.render('meeps', { meeps: result })
 });
 

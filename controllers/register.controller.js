@@ -6,7 +6,7 @@ module.exports.show = async function(req, res, next) {
   if (req.session.loggedin) {
     return res.redirect('/home');
   }
-  return res.render('register', { title: 'Loginsidan'});
+  return res.render('register', { title: 'meeps'});
 };
 
 module.exports.store = async function(req, res, next) {

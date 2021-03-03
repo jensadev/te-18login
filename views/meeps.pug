@@ -1,11 +1,30 @@
 extends layout 
 
-block content 
+mixin card(meep)
+  .card.meep-card.mb-3.shadow
+    .row.g-0
+      .col-1.d-flex.justify-content-end
+        a(href='/home/' + meep.user_id)
+          img.rounded-circle.mt-2(width='48' height='48' src='https://robohash.org/' + meep.author)
+      .col-11
+        a.meep-link(href='/meeps/' + meep.id)
+          .card-body
+            h5.card-title= meep.author 
+              | 
+              small.text-muted= moment(meep.created_at).startOf('minutes').fromNow()
+            p.card-text= meep.body
 
-  each meep in meeps 
-    div
-      p= meep.body 
-      p by: #{meep.author}
-      form(action="/meeps/delete", method="post") 
-        input(type="hidden", name="meepid" value= meep.id)
-        button(type="submit") X
+block content 
+  main.container.meeps-list.mt-5
+    each meep in meeps
+      +card(meep)
+
+
+    h1.position-absolute.top-50.start-50.translate-middle.text-bg meeps
+
+
+
+
+//- form(action="/meeps/delete", method="post") 
+//-   input(type="hidden", name="meepid" value= meep.id)
+//-   button(type="submit") X

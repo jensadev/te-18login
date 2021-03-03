@@ -7,7 +7,7 @@ mixin nav-link(href, name)
       a.nav-link(href=href)= name
 
 block nav
-  nav.navbar.navbar-expand-lg.navbar-light.bg-light
+  nav.navbar.navbar-expand-lg.navbar-light.bg-transparent.shadow-sm
     .container-fluid
       a.navbar-brand(href='/') #{title}
       button.navbar-toggler(type='button' data-bs-toggle='collapse' data-bs-target='#navbarSupportedContent' aria-controls='navbarSupportedContent' aria-expanded='false' aria-label='Toggle navigation')
@@ -17,6 +17,7 @@ block nav
           +nav-link('/login', 'Login')
           +nav-link('/register', 'Register')
           +nav-link('/home', 'Home')
+          +nav-link('/meeps', 'Meeps')
 
       if username
         .nav-item
